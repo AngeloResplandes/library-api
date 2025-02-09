@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("alunoTabela").style.display = "none";
 });
 
+const xButton = document.querySelector("[data-bt]");
+xButton.style.display = "none";
+
 function toggleAtrasos() {
   const tabela = document.getElementById("atrasosTabela");
   if (tabela.style.display === "none" || tabela.style.display === "") {
@@ -21,6 +24,12 @@ function toggleDemanda() {
     tabela.style.display = "none";
   }
 }
+
+document.addEventListener("keydown", (e) => {
+  if (e.key == "Enter") {
+    buscarAluno();
+  }
+})
 
 function buscarAluno() {
   const termo = document.getElementById("searchInput").value.toLowerCase();
@@ -40,10 +49,17 @@ function buscarAluno() {
           row.insertCell(3).textContent = item.numMatricula;
           row.insertCell(4).textContent = item.celularAluno;
           row.insertCell(5).textContent = item.emailAluno;
+          xButton.style.display = "initial";
         }
       });
     })
     .catch(error => console.error("Erro ao buscar aluno:", error));
+}
+
+function fecharBuscaAlunos() {
+  const tabela = document.getElementById("alunoTabela");
+  tabela.style.display = "none";
+  xButton.style.display = "none";
 }
 
 function carregarAtrasos() {

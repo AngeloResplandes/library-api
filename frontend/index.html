@@ -9,59 +9,84 @@
 </head>
 
 <body>
+  <div class="header">
+    <div>
+      <h1>Biblioteca</h1>
+      <p>Universidade Federal do Vale da Lua</p>
+    </div>
+    <div class="navbar">
+      <a href="">Login / Criar <img src="https://dogs.origamid.dev/assets/usuario-106ce8c2.svg"></a>
+    </div>
+
+  </div>
+
+  <div class="line"></div>
+
   <div class="container">
     <h2>Gerência da Biblioteca</h2>
 
-    <input type="text" id="searchInput" placeholder="Procurar aluno pelo nome...">
-    <button onclick="buscarAluno()">Buscar</button>
+    <div class="search">
+      <div class="search-input">
+        <input type="text" id="searchInput" placeholder="Buscar aluno pelo nome">
+        <button class="searchButton" onclick="buscarAluno()"><img src="https://svgsilh.com/svg/1093183.svg"
+            alt=""></button>
+      </div>
 
-    <h3>Detalhes do Aluno</h3>
-    <table id="alunoTabela">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Matrícula</th>
-          <th>Celular</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+      <div>
+        <table id="alunoTabela">
+          <button onclick="fecharBuscaAlunos()" data-bt>X</button>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Matrícula</th>
+              <th>Celular</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-    <h3>Atrasos Frequentes</h3>
-    <button onclick="toggleAtrasos()">Carregar/Ocultar Atrasos</button>
-    <table id="atrasosTabela">
-      <thead>
-        <tr>
-          <th>Nome do Aluno</th>
-          <th>Status</th>
-          <th>Título</th>
-          <th>Data de Empréstimo</th>
-          <th>Data de Entrega</th>
-          <th>Dias de Atraso</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div>
+      <h3>Atrasos Frequentes</h3>
+      <button onclick="toggleAtrasos()">Carregar/Ocultar Atrasos</button>
+      <table id="atrasosTabela">
+        <thead>
+          <tr>
+            <th>Nome do Aluno</th>
+            <th>Status</th>
+            <th>Título</th>
+            <th>Data de Empréstimo</th>
+            <th>Data de Entrega</th>
+            <th>Dias de Atraso</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
 
-    <h3>Demanda de Livros</h3>
-    <button onclick="toggleDemanda()">Carregar/Ocultar Demanda</button>
-    <table id="demandaTabela">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Quantidade Disponível</th>
-          <th>Quantidade de Empréstimos</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div>
+      <h3>Demanda de Livros</h3>
+      <button onclick="toggleDemanda()">Carregar/Ocultar Demanda</button>
+      <table id="demandaTabela">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Quantidade Disponível</th>
+            <th>Quantidade de Empréstimos</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </div>
+
 
   <script src="script.js"></script>
 </body>
