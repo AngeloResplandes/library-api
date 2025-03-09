@@ -1,7 +1,7 @@
 import { Router } from "express"
 import * as AlunoController from "../controllers/aluno.controller"
 
-const router = Router();
+const router = Router()
 
 router.get("/aluno", AlunoController.all)
 router.post("/aluno", AlunoController.add)

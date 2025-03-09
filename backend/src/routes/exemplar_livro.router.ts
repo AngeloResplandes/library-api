@@ -1,7 +1,7 @@
 import { Router } from "express"
 import * as ExemplarLivroController from "../controllers/exemplar_livro.controller"
 
-const router = Router();
+const router = Router()
 
 router.get("/exemplar_livro", ExemplarLivroController.all)
 router.post("/exemplar_livro", ExemplarLivroController.add)

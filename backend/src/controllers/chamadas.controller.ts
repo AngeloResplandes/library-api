@@ -3,8 +3,10 @@ import { sequelize } from "../config/db"
 import { QueryTypes } from "sequelize"
 
 export const atrasosFrequentes = async (req: Request, res: Response) => {
-  try {
-    const query = `
+
+    try {
+
+        const query = `
       SELECT 
           aluno.nomeAluno AS Nome_Aluno,
           emprestimo.status AS Status,
@@ -19,24 +21,32 @@ export const atrasosFrequentes = async (req: Request, res: Response) => {
       WHERE emprestimo.status = "Atrasado";
     `
 
-    const result = await sequelize.query(query, {
-      type: QueryTypes.SELECT,
-    })
+        const result = await sequelize.query(query, {
+            type: QueryTypes.SELECT,
+        })
 
-    if (!result.length) {
-      return res.status(404).json({ message: "Nenhum aluno com atraso encontrado." })
+        if (!result.length) {
+            res.status(404).json({ message: "Nenhum aluno com atraso encontrado." })
+            return
+        }
+
+        res.status(200).json({ Alunos_Atrasados: result })
+        return
+
+    } catch (error) {
+
+        console.error("Erro ao buscar alunos com empréstimos atrasados:", error)
+        res.status(500).json({ message: "Erro interno do servidor." })
+        return
+
     }
-
-    return res.status(200).json({ Alunos_Atrasados: result })
-  } catch (error) {
-    console.error("Erro ao buscar alunos com empréstimos atrasados:", error)
-    return res.status(500).json({ message: "Erro interno do servidor." })
-  }
 }
 
 export const verificarDemanda = async (req: Request, res: Response) => {
-  try {
-    const query = `
+
+    try {
+
+        const query = `
       SELECT 
           livro.nomeLivro AS Titulo,
           COUNT(CASE WHEN exemplar_livro.status_livro = 'Disponivel' THEN 1 END) AS Quantidade_Disponivel,
@@ -48,17 +58,23 @@ export const verificarDemanda = async (req: Request, res: Response) => {
       ORDER BY Quantidade_Emprestimos DESC;
     `
 
-    const result = await sequelize.query(query, {
-      type: QueryTypes.SELECT,
-    })
+        const result = await sequelize.query(query, {
+            type: QueryTypes.SELECT,
+        })
 
-    if (!result.length) {
-      return res.status(404).json({ message: "Nenhum livro encontrado." });
+        if (!result.length) {
+            res.status(404).json({ message: "Nenhum livro encontrado." })
+            return
+        }
+
+        res.status(200).json({ Verificar_Demanda: result })
+        return
+
+    } catch (error) {
+
+        console.error("Erro ao buscar livros disponíveis e quantidade de empréstimos:", error)
+        res.status(500).json({ message: "Erro interno do servidor." })
+        return
+
     }
-
-    return res.status(200).json({ Verificar_Demanda: result });
-  } catch (error) {
-    console.error("Erro ao buscar livros disponíveis e quantidade de empréstimos:", error)
-    return res.status(500).json({ message: "Erro interno do servidor." })
-  }
 }
