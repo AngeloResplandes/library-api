@@ -41,6 +41,8 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
 server.use(errorHandler)
 
-server.listen(process.env.PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${process.env.PORT} 🚀`)
-})
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});

@@ -8,17 +8,17 @@ export const atrasosFrequentes = async (req: Request, res: Response) => {
 
         const query = `
       SELECT 
-          aluno.nomeAluno AS Nome_Aluno,
-          emprestimo.status AS Status,
-          livro.nomeLivro AS Titulo,
-          emprestimo.dataInit AS Data_Emprestimo,
-          emprestimo.dateEntrega AS Data_Entrega,
-          DATEDIFF(CURDATE(), emprestimo.dateEntrega) AS Dias_Atraso
+            aluno.nomeAluno AS Nome_Aluno,
+            emprestimo.status AS Status,
+            livro.nomeLivro AS Titulo,
+            emprestimo.dataInit AS Data_Emprestimo,
+            emprestimo.dateEntrega AS Data_Entrega,
+            JULIANDAY(CURRENT_DATE) - JULIANDAY(emprestimo.dateEntrega) AS Dias_Atraso
       FROM aluno
       INNER JOIN emprestimo ON aluno.idAluno = emprestimo.idAluno
       INNER JOIN exemplar_livro ON emprestimo.idExemplar_Livro = exemplar_livro.idExemplar_Livro
       INNER JOIN livro ON exemplar_livro.idLivro = livro.idLivro
-      WHERE emprestimo.status = "Atrasado";
+      WHERE emprestimo.status = 'Atrasado';
     `
 
         const result = await sequelize.query(query, {
